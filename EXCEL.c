@@ -40,7 +40,6 @@ struct
 void setcolor(int color) { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color); }
 void setcolor_bright() { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); }
 void setcolor_dark() { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); }
-void clrscr() { system("cls"); }
 
 // print value in header from cell
 char* get_header(char str[], int row, int col)
