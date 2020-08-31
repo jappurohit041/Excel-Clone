@@ -1,3 +1,14 @@
+/*
+	It is very basic version of Microsoft Excel which has following functionalities:
+	a) New file option (creates a new file)
+	b) Saving a file (to .csv format)
+	c) Open a file (which is in .csv format)
+	d) Graph Plotting (Graph plotting with labels)
+	e) Average (find the average of the data set or particular column/row)
+	f) Sum (find the total sum of the data set or particular column/row)
+	g) Sort (sort a particular data in asscending order)
+
+*/
 #include<stdio.h>
 #include<string.h>
 #include<windows.h>
@@ -21,11 +32,6 @@ char *file[MAX_ROW+1][MAX_COL+1] = {0};
 int getch();
 int getche();
 
-void gotoxy(short x, short y) {
-        COORD pos = {x, y};
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-
 struct
 {
 	int x, y;
@@ -36,6 +42,7 @@ void setcolor_bright() { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE)
 void setcolor_dark() { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); }
 void clrscr() { system("cls"); }
 
+// print value in header from cell
 char* get_header(char str[], int row, int col)
 {
 	if(file[row][col] != 0)
@@ -45,7 +52,7 @@ char* get_header(char str[], int row, int col)
 
 	return str;
 }
-
+// geting value from the cell
 char* get_val(char str[], int row, int col)
 {
 	if(file[row][col] != 0)
@@ -60,7 +67,7 @@ char* get_val(char str[], int row, int col)
 
 	return str;
 }
-
+// get column name
 char* get_col(char str[], int val)
 {
 	if(val < 26)
@@ -77,7 +84,7 @@ char* get_col(char str[], int val)
 
 	return str;
 }
-
+// save a file
 void save()
 {
 	char fname[30] = "";
@@ -109,7 +116,7 @@ void save()
 
 	fclose(fp);
 }
-
+// free file that is used for creating new file
 void free_file(){
         int i, j;
 	for(i = 0; i < MAX_ROW; i++)
@@ -129,7 +136,7 @@ void put_file(int i, int j, char* str){
                 strcpy(file[i][j], str);
         }
 }
-
+// open csv file
 void open()
 {
 	char fname[30] = "";
@@ -185,7 +192,7 @@ void open()
 
 	fclose(fp);
 }
-
+// display the structure of excel
 void show()
 {
 	int i, j;
@@ -247,7 +254,7 @@ void show()
 
 	setcolor_dark();
 }
-
+// string to int for column
 int col_to_idx(char str[]) {
         int col = 0;
         int len = strlen(str);
@@ -271,8 +278,10 @@ int col_to_idx(char str[]) {
 
         return col;
 }
+//string to int for row
 int row_to_idx(char str[]) { return atoi(str)-1; }
 
+// ploting graph
 void graph_it(){
         char str[CELL_MEM_SIZE] = "";
 
@@ -350,7 +359,7 @@ void graph_it(){
 
         getch();
 }
-
+// average function
 void insert_avg(){
         char str[5] = "";
 
@@ -393,6 +402,7 @@ void insert_avg(){
                 put_file(cursor.y, cursor.x, itoa(avg, str, 10));
         }
 }
+// sum function
 void insert_sum(){
         char str[5] = "";
 
@@ -435,6 +445,7 @@ void insert_sum(){
         }
 }
 
+// comparing to excel cell
 int excel_strcmp(char *p1, char *p2){
         if(p1 == 0){
                 return 1;
@@ -446,7 +457,7 @@ int excel_strcmp(char *p1, char *p2){
                 return strcmp(p1, p2);
         }
 }
-
+//sorting column function
 void sort_col(){
         char str[30];
         char *temp[MAX_ROW];
@@ -466,7 +477,7 @@ void sort_col(){
                 }
         }
 }
-
+// printing cursor
 void print_cur(char *s)
 {
 	int x, y;
@@ -477,7 +488,7 @@ void print_cur(char *s)
 	setcolor_bright();
 	cprintf("%10s", s);
 }
-
+// taking input
 void input()
 {
 	int diff;
@@ -583,7 +594,7 @@ void input()
 			}
 	}
 }
-
+//main function
 int main()
 {
 	while(1)
