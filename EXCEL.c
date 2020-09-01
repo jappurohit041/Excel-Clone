@@ -7,7 +7,8 @@
 	e) Average (find the average of the data set or particular column/row)
 	f) Sum (find the total sum of the data set or particular column/row)
 	g) Sort (sort a particular data in asscending order)
-
+	
+	Credits for this project: Jap Purohit, Poojan Sheth, Shail Patel, Raj Gariwala
 */
 #include<stdio.h>
 #include<string.h>
